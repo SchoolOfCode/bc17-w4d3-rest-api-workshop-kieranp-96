@@ -29,6 +29,23 @@ res.json({
 
 /* Write a request handler to return the correct response when a `GET` request is received to `/astronauts`. Choose the appropriate 
 function from the imported functions at the top of the `app.js` to get your data. */
+app.get('/astronauts', async (req, res) => {
+  try {
+    //throw new Error("test")
+    const astronaut = await getAstronauts();
+    res.status(200)
+    res.json({
+      "success": true,
+      "payload": astronaut,
+    });
+  } catch (error) {
+    res.status(500)
+    res.json({
+      "success": false,
+      "payload": `Failed to load astronaut: ${error}`,
+    });
+  }
+})
 
 // Task 2
 
